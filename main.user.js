@@ -1,10 +1,12 @@
 // ==UserScript==
-// @name         OkWuHanPneumonia
+// @name         好的！！武漢肺炎
 // @namespace    https://www.kevinweng.tk/
-// @version      0.0
-// @description  「好的！武漢肺炎」厭倦舔共媒體與共匪同路人堅持使用新冠肺炎嗎？？不要再吵惹，直接一鍵全部變回武漢肺炎！！
+// @version      0.1.1
+// @description  「好的！！武漢肺炎」：厭倦舔共媒體與共匪同路人堅持使用新冠肺炎嗎？？不要再吵惹，直接一鍵全部變回武漢肺炎！！
 // @author       nevikw39
+// @icon         https://raw.githubusercontent.com/nevikw39/OkWuHanPneumonia/master/favicon.ico
 // @match        *://*/*
+// @run-at       document-end
 // ==/UserScript==
 (function () {
     'use strict';
@@ -19,7 +21,8 @@
         let node = null;
         while (node = walker.nextNode()) {
             node.wuhan = true;
-            node.nodeValue = node.nodeValue.replace(/新冠/, "武漢");
+            if (node.nodeValue.includes("新冠"))
+                node.nodeValue = node.nodeValue.replace(/新冠/, "武漢");
         }
     }, 817);
 })();
