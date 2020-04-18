@@ -6,23 +6,19 @@
 // @author       nevikw39
 // @icon         https://raw.githubusercontent.com/nevikw39/OkWuHanPneumonia/master/favicon.ico
 // @match        *://*/*
-// @run-at       document-end
 // ==/UserScript==
 (function () {
     'use strict';
     setInterval(function () {
         let walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
             acceptNode: function (n) {
-                if (n.nodeValue.trim() && !n.wuhan)
+                if (n.nodeValue.includes("新冠"))
                     return NodeFilter.FILTER_ACCEPT;
                 return NodeFilter.FILTER_SKIP;
             }
         }, false);
         let node = null;
-        while (node = walker.nextNode()) {
-            node.wuhan = true;
-            if (node.nodeValue.includes("新冠"))
-                node.nodeValue = node.nodeValue.replace(/新冠/, "武漢");
-        }
+        while (node = walker.nextNode())
+            node.nodeValue = node.nodeValue.replace(/新冠/, "武漢");
     }, 817);
 })();
